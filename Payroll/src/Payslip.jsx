@@ -20,11 +20,20 @@ const Payslip = ({ show, onClose, payroll, onGenerated }) => {
     const handleShare = async () => {
         if (navigator.share) {
             try {
-                await navigator.share({
+                const shareData = {
                     title: 'Payslip',
-                    text: `Payslip for ${payroll.employeeName}`,
+                    text: `
+                        Payslip for ${payroll.employeeName}\n
+                        Employee ID: ${payroll.employeeId}\n
+                        Hours Worked: ${payroll.hoursWorked.toFixed(2)}\n
+                        Hourly Rate: $${payroll.hourlyRate.toFixed(2)}\n
+                        Total Pay: $${totalPay.toFixed(2)}\n
+                        Deductions: $${payroll.deductions.toFixed(2)}\n
+                        Net Pay: $${netPay.toFixed(2)}
+                    `,
                     url: window.location.href,
-                });
+                };
+                await navigator.share(shareData);
             } catch (error) {
                 console.error('Error sharing:', error);
             }

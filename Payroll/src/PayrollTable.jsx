@@ -49,12 +49,12 @@ const PayrollTable = ({ payrolls }) => {
                             <td>{payroll.employeeName}</td>
                             <td>{payroll.hoursWorked}</td>
                             <td>{payroll.hourlyRate}</td>
-                            <td>{payroll.hoursWorked * payroll.hourlyRate}</td>
-                            <td>{payroll.deductions}</td>
-                            <td>{calculateNetPay(payroll)}</td>
+                            <td>{(payroll.hoursWorked * payroll.hourlyRate).toFixed(2)}</td>
+                            <td>{payroll.deductions.toFixed(2)}</td>
+                            <td>{calculateNetPay(payroll).toFixed(2)}</td>
                             <td>
                                 <button
-                                    className={generatedPayslips[payroll.employeeId] ? 'generated btn' : ''}
+                                    className={generatedPayslips[payroll.employeeId] ? 'generated' : 'btn'}
                                     onClick={() => handleGeneratePayslip(payroll)}
                                 >
                                     {generatedPayslips[payroll.employeeId] ? 'Generated Payslip' : 'Generate Payslip'}
